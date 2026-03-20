@@ -3,14 +3,14 @@ const props = defineProps<{
   title?: string;
   description?: string;
 }>();
+const { splitWords } = useTextSplitter();
+const words = splitWords(props.title || "");
 </script>
 <template>
   <div
     class="w-full flex items-center justify-center h-screen relative isolate"
   >
-    <div
-      class="absolute w-full -top-px text-primary"
-    >
+    <div class="absolute w-full -top-px text-primary">
       <svg
         viewBox="0 0 1440 181"
         fill="none"
@@ -58,7 +58,19 @@ const props = defineProps<{
       </svg>
     </div>
     <div class="w-[80%] flex">
-      <h1 class="text-[10rem] font-bold uppercase">{{ props.title }}</h1>
+      <h1
+        v-gsap-timeline
+        class="basis-1/2 text-[7.5rem] leading-tight font-bold uppercase"
+      >
+        <div
+          class="overflow-hidden inline-block mr-3 word"
+          :key="index"
+          v-for="(word, index) in words"
+        >
+          <p data-animate>{{ word }}</p>
+        </div>
+      </h1>
+      <div></div>
     </div>
     <!-- <p class="text-lg text-muted">{{ props.description }}</p> -->
   </div>

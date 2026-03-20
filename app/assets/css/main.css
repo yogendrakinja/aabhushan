@@ -6,3 +6,8 @@
 @theme {
   --font-sans: 'Public Sans', sans-serif;
 }
+
+.text-stroke {
+  -webkit-text-stroke: 1px #ffffff;
+  -webkit-text-fill-color: transparent;
+}

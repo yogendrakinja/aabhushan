@@ -19,7 +19,9 @@ useSeoMeta({
     v-if="page"
     class="relative"
   >
+    <ClientOnly>
     <PageHero :title="page.title" :description="page.description"/>
+    </ClientOnly>
     <!-- <UPageHero
       :description="page.description"
       :links="page.hero.links"

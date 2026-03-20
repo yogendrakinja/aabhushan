@@ -30,6 +30,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="layout-with-loader">
+    <AppHeader />
     <div v-if="isLoading" class="loading-overlay">
       <div class="loading-spinner"></div>
       <p class="loading-text">Loading…</p>
@@ -37,7 +38,7 @@ onMounted(() => {
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <UApp :toaster="{ expand: false }" :class="{ blurred: isLoading }">
-          <AppHeader />
+          
           <UMain>
             <slot />
           </UMain>

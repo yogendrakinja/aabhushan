@@ -27,7 +27,7 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
 </script>
 
 <template>
-  <UHeader :ui="{ root: 'w-full bg-transparent sticky lg:fixed lg:left-[50%] top-0 lg:top-5 lg:-translate-x-[50%] lg:w-[60%] lg:max-w-[60%] lg:mx-auto lg:shadow-lg lg:shadow-primary lg:border-1 lg:border-gray-600 lg:dark:border-primary lg:rounded-full' }">
+  <UHeader mode="slideover" :ui="{ root: 'w-full bg-transparent fixed lg:left-[50%] top-0 lg:top-5 lg:-translate-x-[50%] lg:w-[60%] lg:max-w-[60%] lg:mx-auto lg:shadow-lg lg:shadow-primary lg:border-1 lg:border-gray-600 lg:dark:border-primary lg:rounded-full' }">
     <template #left>
       <NuxtLink to="/">
         <AppLogo class="w-auto h-6 shrink-0" />
