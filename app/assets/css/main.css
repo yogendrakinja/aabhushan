@@ -1,13 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 @import "@nuxt/ui";
-
 @source "../../../content/**/*";
 
 @theme {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: "Inter", sans-serif;
 }
-
 .text-stroke {
   -webkit-text-stroke: 1px #ffffff;
   -webkit-text-fill-color: transparent;
+}
+.playfair {
+  font-family: "Playfair", serif;
+}
+.line {
+  height: auto;
+  overflow: hidden;
+}
+.word {
+  height: auto;
+  overflow: hidden;
 }

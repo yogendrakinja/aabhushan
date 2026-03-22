@@ -1,26 +1,33 @@
 <script setup lang="ts">
-import PageHero from '~/components/PageHero.vue';
+import PageHero from "~/components/PageHero.vue";
 
-const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
+const { data: page } = await useAsyncData("index", () =>
+  queryCollection("content").first(),
+);
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Page not found",
+    fatal: true,
+  });
 }
 
 useSeoMeta({
   title: page.value.seo?.title || page.value.title,
   ogTitle: page.value.seo?.title || page.value.title,
   description: page.value.seo?.description || page.value.description,
-  ogDescription: page.value.seo?.description || page.value.description
-})
+  ogDescription: page.value.seo?.description || page.value.description,
+});
 </script>
 
 <template>
-  <div
-    v-if="page"
-    class="relative"
-  >
+  <div v-if="page" class="relative">
     <ClientOnly>
-    <PageHero :title="page.title" :description="page.description"/>
+      <PageHero
+        :title="page.title"
+        :description="page.description"
+        :why-choose-us="page.hero.whyChooseUs"
+      />
     </ClientOnly>
     <!-- <UPageHero
       :description="page.description"
@@ -42,34 +49,78 @@ useSeoMeta({
       </template>
     </UPageHero> -->
 
-    <CircleRotateSlider />
+    <!-- <CircleRotateSlider /> -->
 
     <USeparator :ui="{ border: 'border-primary/30' }" />
 
+    <section
+      id="aboutSection"
+      class="w-full flex justify-end py-20 lg:py-0 relative overflow-hidden"
+    >
+      <div
+        class="absolute rounded-full -left-10 top-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]"
+      />
+      <div
+        class="absolute rounded-full -right-10 -bottom-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]"
+      />
+      <ClientOnly>
+        <div class="w-full flex items-center lg:w-11/12">
+          <div class="flex flex-col gap-4 basis-2/5">
+            <div class="flex items-center gap-3">
+              <USeparator
+                class="w-[30px]"
+                :ui="{ border: 'border-primary/30' }"
+              ></USeparator>
+              <h4 class="inline-block text-5xl playfair font-bold uppercase">
+                Who We Are
+              </h4>
+            </div>
+
+            <p
+              v-gsap-timeline-split:lines="{
+                duration: 0.5,
+                stagger: 0.3,
+                scroll: {
+                  scrollTrigger: {
+                    trigger: '#aboutSection',
+                    start: 'top 50%',
+                    toggleActions: 'play none none none',
+                    markers: true,
+                  },
+                },
+              }"
+            >
+              4th gen jewller , BIS approved ans gjepc registerd with 120+ years
+              in manufacturing . A complete B2B platform connecting jewellers
+              and designers with curated natural diamonds, lab-grown stones, and
+              finished jewellery — powered by technology, transparency, and
+              craftsmanship. 100% in house manufacturing , hallmark , delivery
+              time 10-15 days, wholsale and very competitive pricing
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 basis-3/5 overflow-hidden"></div>
+        </div>
+      </ClientOnly>
+    </section>
+    <USeparator :ui="{ border: 'border-primary/30' }" />
     <UPageSection
       id="features"
       :description="page.features.description"
       :features="page.features.features"
       :ui="{
         title: 'text-left @container relative flex',
-        description: 'text-left'
+        description: 'text-left',
       }"
       class="relative overflow-hidden"
     >
-      <div class="absolute rounded-full -left-10 top-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]" />
-      <div class="absolute rounded-full -right-10 -bottom-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]" />
+      <div
+        class="absolute rounded-full -left-10 top-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]"
+      />
+      <div
+        class="absolute rounded-full -right-10 -bottom-10 size-[300px] z-10 bg-primary opacity-30 blur-[200px]"
+      />
       <template #title>
-        <MDC
-          :value="page.features.title"
-          class="*:leading-9"
-        />
-        <div class="hidden @min-[1020px]:block">
-          <UColorModeImage
-            light="/images/light/line-2.svg"
-            dark="/images/dark/line-2.svg"
-            class="absolute top-0 right-0 size-full transform scale-95 translate-x-[70%]"
-          />
-        </div>
+        <MDC :value="page.features.title" class="*:leading-9" />
       </template>
     </UPageSection>
 
@@ -179,13 +230,13 @@ useSeoMeta({
             :key="index"
             variant="subtle"
             :description="testimonial.quote"
-            :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]' }"
+            :ui="{
+              description:
+                'before:content-[open-quote] after:content-[close-quote]',
+            }"
           >
             <template #footer>
-              <UUser
-                v-bind="testimonial.user"
-                size="xl"
-              />
+              <UUser v-bind="testimonial.user" size="xl" />
             </template>
           </UPageCard>
         </UPageColumns>
